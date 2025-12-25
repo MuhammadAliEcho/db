@@ -51,19 +51,19 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
-    # postgres:
-    #     image: postgres:13
-    #     ports:
-    #         - '5432:5432'
-    #     # restart: always
-    #     environment:
-    #         # POSTGRES_DB: 'typebot'
-    #         POSTGRES_USER: ${DB_USERNAME}
-    #         POSTGRES_PASSWORD: '${DB_PASSWORD}'
-    #     volumes:
-    #         - './sail-postgres:/var/lib/postgresql/data'
-    #     networks:
-    #         - sail
+    postgres:
+        image: postgres:13
+        ports:
+            - '5432:5432'
+        # restart: always
+        environment:
+            # POSTGRES_DB: 'typebot'
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: '${DB_PASSWORD}'
+        volumes:
+            - './sail-postgres:/var/lib/postgresql/data'
+        networks:
+            - sail
     # minio:
     #     image: minio/minio
     #     command: server /data --console-address ":9001"
@@ -117,16 +117,16 @@ services:
             - sail
         ports:
             - 8083:80
-    # adminer:
-    #     depends_on:
-    #         - postgres
-    #     image: adminer
-    #     ports:
-    #         - 8084:8080
-    #     environment:
-    #         ADMINER_DEFAULT_SERVER: postgres
-    #     networks:
-    #         - sail
+    adminer:
+        depends_on:
+            - postgres
+        image: adminer
+        ports:
+            - 8084:8080
+        environment:
+            ADMINER_DEFAULT_SERVER: postgres
+        networks:
+            - sail
     # phpredisadmin:
     #     depends_on:
     #         - redis
