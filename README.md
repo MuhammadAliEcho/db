@@ -126,6 +126,47 @@ Set these in `.env` (Compose automatically loads it):
 
 Use the service names on the Docker network (`sail`) when your app runs in containers, or `localhost` with mapped ports when running on your host.
 
+### Networking tips
+
+- App inside the same Compose network: use service names (`mysql`, `postgres`, `redis`, `mailpit`). No ports needed inside the network unless you changed defaults.
+- App on your host machine: use `localhost` and the mapped ports (e.g., `3306`, `5432`, `6379`).
+- App in a different container not attached to `sail`:
+  - Option A (recommended): attach that container to the `sail` network and use service names.
+  - Option B: use the host-mapped ports with `host.docker.internal` (macOS/Windows) as the host, e.g., `host.docker.internal:3306` for MySQL. On Linux, use the Docker gateway IP (often `172.17.0.1`).
+
+#### Attach an external container to the `sail` network
+
+Already running container:
+
+```bash
+docker network connect sail <your_container_name>
+# Then inside that container, use hosts like: mysql, postgres, redis, mailpit
+```
+
+Start a new container on the network:
+
+```bash
+docker run --rm -it --network sail alpine:3.20 sh
+# apk add --no-cache mysql-client
+# mysql -hmysql -u$DB_USERNAME -p$DB_PASSWORD -P3306
+```
+
+Compose service in another repo/project (declare external network):
+
+```yaml
+networks:
+  sail:
+    external: true
+
+services:
+  myapp:
+    image: node:20-alpine
+    networks:
+      - sail
+```
+
+
+
 ### PHP (Laravel) `.env`
 
 ```env
