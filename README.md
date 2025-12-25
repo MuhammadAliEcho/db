@@ -2,6 +2,23 @@
 
 A language-agnostic, ready-to-run local database stack for developers. Bring up MySQL, PostgreSQL, Redis, Mailpit, plus web UIs (phpMyAdmin for MySQL and Adminer for Postgres) with one command. Works for PHP, Node.js, Python, and more.
 
+## About
+
+This repository provides a simple, consistent way to run common data services for local and dev environments. It is designed to help teams and individual developers quickly spin up MySQL, Postgres, Redis, and an SMTP sink (Mailpit) along with web UIs for database administration.
+
+- Purpose: one-command local DB stack for any language.
+- Audience: backend/web developers, QA, CI preview environments.
+- Benefits: fast onboarding, reproducible environments, zero native DB installs.
+- Scope: local and development use only; not hardened for production.
+
+Repository layout highlights:
+- Compose file: [docker-compose.yml](docker-compose.yml)
+- Env sample: [example.env](example.env)
+- MySQL config: [my.cnf](my.cnf)
+- MySQL logs: [logs/](logs)
+- Persistent data: [sail-mysql/](sail-mysql), [sail-postgres/](sail-postgres), [sail-redis/](sail-redis)
+- CI workflows: [.github/workflows/compose-validate.yml](.github/workflows/compose-validate.yml), [.github/workflows/release.yml](.github/workflows/release.yml)
+
 ## Status & Ports
 
 | Service        | Host Port | Internal | UI Link |
@@ -239,3 +256,13 @@ This repository includes a lightweight GitHub Actions workflow that validates th
 ---
 
 This stack is intended for local and dev use only. Do not expose these services directly to the public internet without hardening.
+
+## Contributing
+
+- Open issues and PRs for improvements, docs, or new services.
+- Follow the existing style for Compose services and environment variables.
+- For significant changes, discuss in an issue first.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.

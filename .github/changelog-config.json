@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/mikepenz/release-changelog-builder-action/main/schema.json",
+  "categories": [
+    { "title": "### Added", "labels": ["feature", "enhancement", "added"] },
+    { "title": "### Changed", "labels": ["change", "refactor"] },
+    { "title": "### Fixed", "labels": ["bug", "fix"] },
+    { "title": "### Docs", "labels": ["docs"] }
+  ],
+  "ignore_labels": ["ignore", "skip-changelog"],
+  "sort": { "order": "DESC", "on_property": "mergedAt" },
+  "template": "{{CHANGELOG}}\n\n### Files\n- docker-compose.yml\n- README.md\n- CI workflows\n"
+}
