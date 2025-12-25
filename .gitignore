@@ -1,0 +1,13 @@
+logs/
+sail-mysql/
+sail-minio/
+sail-postgres/
+sail-redis/
+vendor/
+redis-sentinels/sentinel1-data/
+redis-sentinels/
+*.log
+.DS_Store
+*.tmp
+*.swp
+*.bak
